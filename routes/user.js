@@ -25,6 +25,7 @@ router.get('/user/:id', (req, res) => {
   const query = conn.query(sql, (err, results) => {
     if (err) throw err;
     res.send(JSON.stringify({ "status": 200, "error": null, "response": results }));
+    console.log(req.params.id)
   });
 });
 
