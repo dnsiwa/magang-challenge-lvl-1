@@ -20,10 +20,10 @@ router.get('/', (req, res) => {
 });
 
 //show list user with id
-router.get('/user/:id', (req, res) => {
+router.get('/:id', (req, res) => {
   const sql = "SELECT * FROM users WHERE id=" + req.params.id;
   const query = conn.query(sql, (err, results) => {
-    if (err) throw err;
+    if (err) throw err; 
     res.send(JSON.stringify({ "status": 200, "error": null, "response": results }));
     console.log(req.params.id)
   });
@@ -53,7 +53,7 @@ router.post('/', (req, res) => {
 });
 
 //update user
-router.put('/user/:id', (req, res) => {
+router.put('/:id', (req, res) => {
   const sql = "UPDATE users SET fullname='" + req.body.fullname + "', username='" + req.body.username + "',password='" + req.body.password + "' WHERE id=" + req.params.id;
   const query = conn.query(sql, (err, results) => {
     if (err) throw err;
@@ -63,7 +63,7 @@ router.put('/user/:id', (req, res) => {
 });
 
 //Delete data product berdasarkan id
-router.delete('/user/:id', (req, res) => {
+router.delete('/:id', (req, res) => {
   let sql = "DELETE FROM users WHERE id=" + req.params.id + "";
   let query = conn.query(sql, (err, results) => {
     if (err) throw err;
