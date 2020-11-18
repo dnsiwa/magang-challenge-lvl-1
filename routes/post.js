@@ -56,7 +56,7 @@ router.post('/', (req, res) => {
 
 //update post
 router.put('/:id', (req, res) => {
-  const sql = "UPDATE posts SET title='" + req.body.title + "', content='" + req.body.content + "',insert_by='" + insertBy() + "',insert_at='" + insertAt() + "' WHERE id=" + req.params.id;
+  const sql = "UPDATE posts SET title='" + req.body.title + "', content='" + req.body.content + "',insert_by='" + insertBy(req.headers.authorization) + "',insert_at='" + insertAt() + "' WHERE id=" + req.params.id;
   const query = conn.query(sql, (err, results) => {
     if (err) throw err;
     res.send(JSON.stringify({ "status": 200, "error": null, "response": results }));
