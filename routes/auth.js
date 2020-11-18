@@ -21,19 +21,24 @@ function generateAccessToken(payload) {
     }, process.env.access_token_secret, { expiresIn: '1800s' })
 }
 
+
 // Login Endpoint
 router.post('/', (req, res) => {
+
     const sql = `SELECT * FROM users WHERE username=?`
     conn.query({ sql, values: [req.body.username] }, (err, results) => {
+        
         if (err) throw err
 
         const user = results[0]
+
         bcrypt.compare(req.body.password, user.password, function (err, result) {
             if (err) throw err
 
             if (result === true) {
                 const token = generateAccessToken(user);
-                res.json({ "status": 200, "error": null, "response": token })
+                res.json({ "status": 200, "error": null, "response": token }) 
+                console.log(user)
             } else {
                 res.status(401).json({ "status": 401, "error": "Login error" })
             }
@@ -42,3 +47,4 @@ router.post('/', (req, res) => {
 })
 
 module.exports = router
+

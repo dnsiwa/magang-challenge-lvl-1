@@ -12,10 +12,12 @@ router.use(authMiddleware.authenticateToken)
 
 //show list user
 router.get('/', (req, res) => {
+
   const sql = "SELECT * FROM users";
   const query = conn.query(sql, (err, results) => {
     if (err) throw err;
     res.json({ "status": 200, "error": null, "response": results });
+    
   });
 });
 
@@ -25,7 +27,7 @@ router.get('/:id', (req, res) => {
   const query = conn.query(sql, (err, results) => {
     if (err) throw err; 
     res.send(JSON.stringify({ "status": 200, "error": null, "response": results }));
-    console.log(req.params.id)
+    // console.log(req.params.id)
   });
 });
 
@@ -34,7 +36,7 @@ router.get('/:id', (req, res) => {
 router.post('/', (req, res) => {
   const plainPassword = req.body.password
   bcrypt.hash(plainPassword, 10, function (err, hash) {
-    console.log(hash)
+    // console.log(hash)
     if (err) throw err;
 
     const data = {
@@ -47,7 +49,7 @@ router.post('/', (req, res) => {
     const query = conn.query(sql, data, (err, results) => {
       if (err) throw err;
       res.send(JSON.stringify({ "status": 200, "error": null, "response": results }));
-      console.log(req.body.fullname)
+      // console.log(req.body.fullname)
     });
   });
 });
@@ -58,7 +60,7 @@ router.put('/:id', (req, res) => {
   const query = conn.query(sql, (err, results) => {
     if (err) throw err;
     res.send(JSON.stringify({ "status": 200, "error": null, "response": results }));
-    console.log(req.body.fullname)
+    // console.log(req.body.fullname)
   });
 });
 
@@ -70,6 +72,5 @@ router.delete('/:id', (req, res) => {
     res.send(JSON.stringify({ "status": 200, "error": null, "response": results }));
   });
 });
-
 
 module.exports = router;

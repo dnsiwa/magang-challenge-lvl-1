@@ -15,6 +15,8 @@ function authenticateToken(req, res, next) {
         req.user = user
         next() // pass the execution off to whatever request the client intended
     })
+    // console.log(token)
+
 }
 
 module.exports = { authenticateToken }
